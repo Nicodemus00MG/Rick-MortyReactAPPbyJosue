@@ -1,23 +1,37 @@
-import React from 'react'
-import axios from 'axios'
-import { useState,useEffect } from 'react'
-const CardResidents = ({residents}) => {
+import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+const CardResidents = ({ resident }) => {
+  
+const [residentData, setResidentData] = useState('')
 
-// const [dataResident, setDataResident] = useState()
-//   useEffect(() => {
-//     axios(residents)
-//     .then(res=>setDataResident(res.data))
-//     .catch(e=>console.log(e))
-//   }, [dataResident])
+  useEffect(() => {
+    axios.get(resident)
+    .then(res=> setResidentData(res.data))
+    .catch(e=>console.log(e))
+  
+   
+  }, [])
+  
 
-
-console.log(residents)
+console.log(residentData)
 
   return (
-    <div className='cardResident'>
-        
+    <div className="cardResident">
+       <h4 className="status_box">{residentData.status}</h4>
+      <img className="image_card_character" src={residentData.image} alt={''}  width={'200px'}/>
+      <div className="info_character_box">
+      <h3 >{residentData.name}</h3>
+      <h4>{residentData.species}</h4>
+      <p>{residentData.gender}</p>
+      <p>{residentData.type}</p>
+      
+      </div>
+     
+      
     </div>
-  )
-}
+    
+  );
+};
 
-export default CardResidents
+export default CardResidents;
